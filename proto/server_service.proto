@@ -1,0 +1,30 @@
+syntax = "proto3";
+package server;
+
+service ServerService {
+    rpc InstallServer(InstallServerRequest) returns (InstallServerReply);
+    rpc StartServer(StartServerRequest) returns (StartServerReply);
+}
+
+message Server {
+    int32 id = 1;
+    string name = 2;
+    string login = 3;
+    string install_dir =4;
+}
+
+message InstallServerRequest {
+    Server server = 1;
+}
+
+message InstallServerReply {
+    int32 install_id = 1;
+}
+
+message StartServerRequest {
+    Server server = 1;
+}
+
+message StartServerReply {
+    int32 process_id = 1;
+}
