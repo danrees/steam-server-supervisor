@@ -1,5 +1,6 @@
 use std::env;
 
+use dotenv::dotenv;
 use steam_server_supervisor::{server::server_service_server::ServerServiceServer, Service};
 use tonic::transport::Server;
 
@@ -7,7 +8,7 @@ use tonic::transport::Server;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     //let (tx_i, mut rx_i) = mpsc::channel(4);
     //let (tx_r, mut rx_r) = mpsc::channel(4);
-
+    dotenv().ok();
     let steam_cmd = env::var("STEAM_CMD")?;
     let base_dir = env::var("BASE_DIR")?;
     let addr = env::var("GRPC_ADDR").unwrap_or(String::from("[::1]:50051"));

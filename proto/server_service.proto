@@ -2,7 +2,8 @@ syntax = "proto3";
 package server;
 
 service ServerService {
-    rpc InstallServer(InstallServerRequest) returns (InstallServerReply);
+    rpc InstallServer(InstallServerRequest) returns (stream ServerInstallOutput);
+    rpc TestStream(TestStreamRequest) returns (stream TestStreamResponse);
     rpc StartServer(StartServerRequest) returns (StartServerReply);
 }
 
@@ -27,4 +28,16 @@ message StartServerRequest {
 
 message StartServerReply {
     int32 process_id = 1;
+}
+
+message ServerInstallOutput {
+    string msg = 1;
+}
+
+message TestStreamRequest {
+    string processLocation = 1;
+}
+
+message TestStreamResponse {
+    string msg = 1;
 }
